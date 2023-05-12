@@ -90,13 +90,16 @@ h2{
 }
 nav ul {
 	display: flex;
-	align-items: center;
 	list-style-type: none;
+    gap: 50px
 
 }
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+}
+nav ul li img {
+	width: 19px;
 }
 
 li:hover {
@@ -153,6 +156,7 @@ input[type="submit"]{
     font-size: 14px;
     color: #3D3D3D;
     text-decoration: underline;
+    font-weight: bold;
 
 }
 

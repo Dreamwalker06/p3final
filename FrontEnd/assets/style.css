@@ -58,6 +58,11 @@ header {
 	justify-content: space-between;
 	margin: 50px 0
 }
+
+nav ul li img {
+	width: 19px;
+}
+
 section {
 	margin: 50px 0
 }
@@ -86,9 +91,8 @@ h2{
 }
 nav ul {
 	display: flex;
-	align-items: center;
 	list-style-type: none;
-
+	gap: 50px;
 }
 nav li {
 	padding: 0 10px;
@@ -135,7 +139,7 @@ li:hover {
 
 .gallery img {
 	width: 100%;
-
+	margin-bottom: 10px;
 }
 #contact {
 	width: 50%;
