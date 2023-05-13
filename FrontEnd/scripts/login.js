@@ -1,3 +1,4 @@
+
 const form = document.querySelector('form');
 
 form.addEventListener('submit', async (event) => {
@@ -28,7 +29,7 @@ form.addEventListener('submit', async (event) => {
 
       // Stockage du token dans le localStorage
       localStorage.setItem('token', token);
-
+ 
       // Redirection vers la page d'accueil
       window.location.href = "../index.html"
     } else {
@@ -41,3 +42,21 @@ form.addEventListener('submit', async (event) => {
     alert('Une erreur est survenue lors de la connexion');
   }
 });
+
+// Vérification de la présence du token dans le localStorage
+if (localStorage.getItem('token')) {
+    // L'utilisateur est connecté, affichage des éléments correspondants
+    document.querySelector('.top-edition').style.display = 'flex';
+    document.querySelector('.modify-portrait').style.display = 'flex';
+    document.querySelector('.modify-projet-logo').style.display = 'flex';
+    document.querySelector('.filtre').style.display = 'none';
+    document.querySelector('.gallery').style.marginTop = '90px';
+    document.querySelector('.header-edition').style.paddingTop = '50px';
+  } else {
+    // L'utilisateur n'est pas connecté, affichage des éléments correspondants
+    document.querySelector('.top-edition').style.display = 'none';
+    document.querySelector('.modify-portrait').style.display = 'none';
+    document.querySelector('.modify-projet-logo').style.display = 'none';
+    document.querySelector('.filtre').style.display = 'flex';
+  }
+  

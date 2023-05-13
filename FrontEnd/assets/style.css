@@ -53,6 +53,56 @@ body {
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
+
+.top-edition {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	height: 59px;
+	background-color: black;
+	color: white;
+	margin: 0;
+	align-items: center;
+	gap: 10px;
+  }
+  
+
+#top-edition-btn {
+	background-color: white;
+	height: 38px;
+	border-radius: 60px;
+	padding-left: 20px;
+	padding-right: 20px;
+	font-weight: 500;
+
+}
+
+.top-edition .fa-pen-to-square {
+	color: white;
+}
+
+.modify-portrait {
+	margin-top: 15px;
+	display: flex;
+	gap: 10px;
+	margin-left: 55px
+}
+
+.modify-projet {
+	display: flex;	
+	justify-content: center;
+}
+
+.modify-projet-logo {
+	display: flex;
+	padding-left: 30px;
+	margin-top: 8px;
+	gap: 5px;
+}
 header {
 	display: flex;
 	justify-content: space-between;
