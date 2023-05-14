@@ -57,13 +57,21 @@ if (localStorage.getItem('token')) {
       event.preventDefault();
       localStorage.removeItem('token');
       window.location.href = './index.html'; 
-    })
 
+    })
+ 
   } else {
     // L'utilisateur n'est pas connecté, affichage des éléments correspondants
     document.querySelector('.top-edition').style.display = 'none';
     document.querySelector('.modify-portrait').style.display = 'none';
     document.querySelector('.modify-projet-logo').style.display = 'none';
     document.querySelector('.filtre').style.display = 'flex';
+  }
+
+  const modalContainer = document.querySelector(".modal-container");
+  const modalTriggers = document.querySelectorAll(".modal-trigger")
+  modalTriggers.forEach(trigger => trigger.addEventListener("click", toggleModal))
+  function toggleModal() {
+    modalContainer.classList.toggle("active")
   }
   
