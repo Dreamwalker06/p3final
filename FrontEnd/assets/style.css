@@ -81,6 +81,10 @@ body {
 
 }
 
+#logout {
+	color:black;
+	font-size: 16px;
+}
 .top-edition .fa-pen-to-square {
 	color: white;
 }

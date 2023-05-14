@@ -88,6 +88,11 @@ h2{
     justify-content: center;
     margin-top: 150px;
 }
+
+#logout {
+	color:black;
+	font-size: 16px;
+}
 nav ul {
 	display: flex;
 	list-style-type: none;

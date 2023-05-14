@@ -52,6 +52,13 @@ if (localStorage.getItem('token')) {
     document.querySelector('.filtre').style.display = 'none';
     document.querySelector('.gallery').style.marginTop = '90px';
     document.querySelector('.header-edition').style.paddingTop = '50px';
+    document.querySelector('#logout').textContent = 'logout';
+    logout.addEventListener('click', (event) => {
+      event.preventDefault();
+      localStorage.removeItem('token');
+      window.location.href = './index.html'; 
+    })
+
   } else {
     // L'utilisateur n'est pas connecté, affichage des éléments correspondants
     document.querySelector('.top-edition').style.display = 'none';
