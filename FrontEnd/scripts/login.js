@@ -74,4 +74,37 @@ if (localStorage.getItem('token')) {
   function toggleModal() {
     modalContainer.classList.toggle("active")
   }
-  
+
+  fetch('http://localhost:5678/api/works')
+  .then(response => response.json())
+  .then(data => {
+    data.forEach(objet => {
+        const div = document.createElement("div");
+        document.querySelector('.gallery-edition').appendChild(div);
+        const img = document.createElement("img");
+        img.src = objet.imageUrl;
+        img.classList.add("modal-img");
+        const imgContainer = document.createElement("div");
+        imgContainer.style.position = "relative"; 
+        const trashIcon = document.createElement("i");
+        trashIcon.classList.add("fa-regular", "fa-trash-can");
+        trashIcon.style.position = "absolute"; 
+        trashIcon.style.top = "5px"; 
+        trashIcon.style.right = "10px"; 
+        div.appendChild(imgContainer);
+        imgContainer.appendChild(img);
+        imgContainer.appendChild(trashIcon);
+        const title = document.createElement("p");
+        title.textContent = "éditer";
+        div.appendChild(title);
+  })
+})
+
+const modalContainer2 = document.querySelector(".modal-container2");
+const modalTriggers2 = document.querySelectorAll(".trigger")
+modalTriggers2.forEach(trigger2 => trigger2.addEventListener("click", toggleModal2))
+
+function toggleModal2() {
+  modalContainer2.classList.toggle("active")
+  modalContainer.classList.toggle("active")
+}

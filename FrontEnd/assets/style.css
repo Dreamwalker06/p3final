@@ -107,6 +107,9 @@ body {
 	margin-top: 8px;
 	gap: 5px;
 }
+.modify-projet-logo:hover {
+	cursor: pointer;
+}
 header {
 	display: flex;
 	justify-content: space-between;
@@ -300,17 +303,20 @@ footer nav ul {
 	background: white;
 	border-radius: 15px;
 	position: absolute;
-	top: 40%;
+	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	text-align: center;
 }
 
 .close-modal {
 	position: absolute;
 	top: 20px;
 	right: 20px;
-	background: white;
-	border-color: white;
+	background: transparent;
+	border:none;
+	font-size: 16px;
+	cursor: pointer;
 }
 
 #add-photo {
@@ -318,16 +324,172 @@ footer nav ul {
 	color: white;
 	font-family: 'Syne';
 	border-radius: 25px;
+	margin-bottom: 30px;
+	width: 230px;
+	padding-top: 9px;
+	padding-bottom: 9px;
+	border: none
 }
 
 #gallery-title {
 	font-size: 26px;
-	display: flex;
-	justify-content: center;
+	margin-bottom: 46px;
 }
 
 #delete-photo {
 	color: #D65353;
-	display: flex;
-	justify-content: center;
 }
+
+.modal-img {
+	width: 72px;
+	height: 104px;
+
+}
+
+.gallery-edition {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-template-rows: repeat(3, auto);
+	gap: 6px;
+	width: 70%;
+	margin: auto;
+}
+
+.gallery-edition p {
+	display: flex;
+	padding-left: 5px;
+	margin-bottom: 10px;
+}
+
+hr {
+	width: 68%;
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+.fa-trash-can {
+	color: white;
+	background-color: black;
+	padding: 2px;
+}
+
+.modal-container2 {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+	left:0;
+}
+.modal-container2.active {
+	display: block;
+}
+
+
+.modal-add-photo {
+	width: 630px;
+	height: 670px;
+	border-radius: 15px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	text-align: center;
+
+}
+
+.close-modal2 {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	background: transparent;
+	border:none;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+#gallery-title2 {
+	font-size: 26px;
+	padding-top: 60px;
+	margin-bottom: 46px;
+	text-align: center;
+}
+
+#title-category {
+	display: flex;
+	flex-direction: column;
+	align-items: center
+}
+
+#title-category input , select {
+	width: 420px;
+	height: 50px;
+	margin-top: 10px;
+	background: #FFFFFF;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	border: none;
+	margin-bottom: 10px;
+}
+
+.add-picture {
+	background-color: #E8F1F7;
+	border: none;
+	height: 169px;
+	width: 420px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 30px;
+}
+
+.add-picture p {
+	font-size: 10px;
+}
+
+.add-picture button {
+	font-size: 14px;
+	color: #306685;
+	background-color: #CBD6DC;
+	padding: 10px 33px;
+	width: 173px;
+	border-radius: 50px;
+	border: none;
+	margin-bottom: 7px;
+}
+.fa-image {
+	padding-top: 28px;
+	font-size: 40px;
+	color: #B9C5CC;
+	margin-bottom: 25px;
+}
+
+#add-photo2 {
+	background-color: #A7A7A7;
+	color: white;
+	font-family: 'Syne';
+	border-radius: 25px;
+	margin-bottom: 30px;
+	width: 230px;
+	padding-top: 9px;
+	padding-bottom: 9px;
+	border: none;		
+}
+
+#add-photo2:hover {
+	background-color: #1D6154;
+}
+
+.fa-arrow-left {
+	color: black;
+	font-size: 16px;
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	
+}
+
+.fa-arrow-left:hover {
+	cursor: pointer
+};
