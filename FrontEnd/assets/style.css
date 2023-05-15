@@ -330,6 +330,10 @@ footer nav ul {
 	padding-bottom: 9px;
 	border: none
 }
+#add-photo:hover {
+	cursor: pointer;
+
+}
 
 #gallery-title {
 	font-size: 26px;
@@ -458,6 +462,9 @@ hr {
 	border: none;
 	margin-bottom: 7px;
 }
+.add-picture button:hover {
+	cursor: pointer
+}
 .fa-image {
 	padding-top: 28px;
 	font-size: 40px;
@@ -479,6 +486,7 @@ hr {
 
 #add-photo2:hover {
 	background-color: #1D6154;
+	cursor: pointer;
 }
 
 .fa-arrow-left {
@@ -493,3 +501,4 @@ hr {
 .fa-arrow-left:hover {
 	cursor: pointer
 };
+

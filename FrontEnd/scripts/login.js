@@ -108,3 +108,57 @@ function toggleModal2() {
   modalContainer2.classList.toggle("active")
   modalContainer.classList.toggle("active")
 }
+
+const token = localStorage.getItem('token');
+const addPhoto = document.getElementById('add-photo2');
+addPhoto.addEventListener('click', () => {
+
+  fetch('http://localhost:5678/api/works', {
+    method: 'POST',
+    headers: {
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify({ data: 'example data' })
+  })
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+});
+
+const select = document.querySelector('select');
+
+fetch('http://localhost:5678/api/categories')
+  .then(response => response.json())
+  .then(data => {
+    data.forEach(item => {
+      const option = document.createElement('option');
+      option.value = item.id;
+      option.text = item.name;
+      select.appendChild(option);
+    });
+  })
+  .catch(error => console.error(error));
+
+  const btnAddPhoto = document.getElementById('btn-add-photo');
+  const inputFile = document.getElementById('input-file');
+  
+  btnAddPhoto.addEventListener('click', () => { 
+    inputFile.click();
+  })
+
+  inputFile.addEventListener('change', () => {
+    const file = inputFile.files[0];
+    const formData = new FormData();
+    formData.append('file', file);
+  
+    fetch('http://localhost:5678/api/works', {
+      method: 'POST',
+      headers: {
+              "Authorization": `Bearer ${token}`
+            },
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+  });
