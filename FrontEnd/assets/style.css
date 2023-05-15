@@ -83,7 +83,7 @@ body {
 
 #logout {
 	color:black;
-	font-size: 16px;
+	font-size: 14px;
 }
 .top-edition .fa-pen-to-square {
 	color: white;
@@ -202,6 +202,7 @@ li:hover {
 .filtre button:hover {
 	background-color: #1D6154;
 	color: white;
+	cursor: pointer;
 }
 .filtre button {
 	border-radius: 60px;
@@ -501,4 +502,3 @@ hr {
 .fa-arrow-left:hover {
 	cursor: pointer
 };
-
