@@ -501,4 +501,20 @@ hr {
 
 .fa-arrow-left:hover {
 	cursor: pointer
-};
+}
+
+.modify-bio {
+	display: flex;
+	margin-bottom: 20px;
+	gap: 10px;
+}
+
+article {
+	margin-bottom: 30px;
+}
+
+.fade-out {
+	opacity: 0;
+	transition: opacity 0.5s ease-out;
+  }
+  

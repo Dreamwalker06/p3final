@@ -97,7 +97,7 @@ h2{
 nav ul {
 	display: flex;
 	list-style-type: none;
-    gap: 50px;
+    gap: 50px
     
 
 }
@@ -177,4 +177,3 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
-

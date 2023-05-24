@@ -9,7 +9,7 @@ const swaggerDocs = yaml.load('swagger.yaml')
 const app = express()
 app.use(cors())
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true, limit: '50mb'}))
 app.use(helmet({
       crossOriginResourcePolicy: false,
     }));

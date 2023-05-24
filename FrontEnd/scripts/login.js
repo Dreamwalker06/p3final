@@ -53,6 +53,7 @@ if (localStorage.getItem('token')) {
     document.querySelector('.gallery').style.marginTop = '90px';
     document.querySelector('.header-edition').style.paddingTop = '50px';
     document.querySelector('#logout').textContent = 'logout';
+    document.querySelector('#logout').style.fontSize = '16.8px';
     logout.addEventListener('click', (event) => {
       event.preventDefault();
       localStorage.removeItem('token');
@@ -75,6 +76,7 @@ if (localStorage.getItem('token')) {
     modalContainer.classList.toggle("active")
   }
 
+  /* works et icone */
   fetch('http://localhost:5678/api/works')
   .then(response => response.json())
   .then(data => {
@@ -97,9 +99,34 @@ if (localStorage.getItem('token')) {
         const title = document.createElement("p");
         title.textContent = "éditer";
         div.appendChild(title);
+/* Supression de works */
+      trashIcon.addEventListener("click", () => {
+        fetch(`http://localhost:5678/api/works/${objet.id}`, {
+          method: "DELETE",
+          headers: {
+            "Authorization": `Bearer ${token}`
+          }
+        })
+          .then(response => {
+            if (response.ok) {
+              console.log("Élément supprimé avec succès de l'API");
+              // Supprimer également l'élément de l'interface utilisateur
+              div.remove();
+            } else {
+              console.error("La suppression de l'élément a échoué");
+            }
+          })
+          .catch(error => {
+            console.error("Une erreur s'est produite lors de la suppression :", error);
+          });
+      });
+    });
   })
-})
-
+  .catch(error => {
+    console.error("Une erreur s'est produite lors de la récupération des données :", error);
+  });
+  
+/* Switch modal */
 const modalContainer2 = document.querySelector(".modal-container2");
 const modalTriggers2 = document.querySelectorAll(".trigger")
 modalTriggers2.forEach(trigger2 => trigger2.addEventListener("click", toggleModal2))
@@ -110,21 +137,9 @@ function toggleModal2() {
 }
 
 const token = localStorage.getItem('token');
-const addPhoto = document.getElementById('add-photo2');
-addPhoto.addEventListener('click', () => {
 
-  fetch('http://localhost:5678/api/works', {
-    method: 'POST',
-    headers: {
-      "Authorization": `Bearer ${token}`
-    },
-    body: JSON.stringify({ data: 'example data' })
-  })
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error(error));
-});
-
+/* Catégorie */
+let selectedCategory = ''; // Variable pour stocker la catégorie sélectionnée
 const select = document.querySelector('select');
 
 fetch('http://localhost:5678/api/categories')
@@ -136,29 +151,102 @@ fetch('http://localhost:5678/api/categories')
       option.text = item.name;
       select.appendChild(option);
     });
+     // Écouter le changement de sélection dans la liste déroulante
+     select.addEventListener('change', () => {
+      selectedCategory = select.value; // Mettre à jour la valeur de la catégorie sélectionnée
+    });
   })
   .catch(error => console.error(error));
 
-  const btnAddPhoto = document.getElementById('btn-add-photo');
-  const inputFile = document.getElementById('input-file');
-  
-  btnAddPhoto.addEventListener('click', () => { 
-    inputFile.click();
-  })
+  /* Deuxieme modal : Ajout works*/
+/* Ajout photo */
+const btnAddPhoto = document.getElementById('btn-add-photo');
+const inputFile = document.getElementById('input-file');
+const imageContainer = document.getElementById('image-container');
 
-  inputFile.addEventListener('change', () => {
-    const file = inputFile.files[0];
-    const formData = new FormData();
-    formData.append('file', file);
-  
-    fetch('http://localhost:5678/api/works', {
-      method: 'POST',
-      headers: {
-              "Authorization": `Bearer ${token}`
-            },
-      body: formData
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
+btnAddPhoto.addEventListener('click', () => { 
+  inputFile.click();
+});
+
+inputFile.addEventListener('change', () => {
+  const file = inputFile.files[0];
+  const reader = new FileReader();
+
+  reader.addEventListener('load', () => {
+    const image = document.createElement('img');
+    image.src = reader.result;
+    image.style.width = '150px';
+    image.style.height = '169px';
+    imageContainer.appendChild(image);
+
+      if (inputFile.files.length > 0) {
+        document.getElementById("btn-add-photo").style.display = "none";
+        document.querySelector(".fa-image").style.display = "none";
+        document.querySelector('.text-maxsize').style.display = 'none';
+      } else {
+        document.getElementById("btn-add-photo").style.display = "block";
+        document.querySelector(".fa-image").style.display = "block";
+        document.querySelector('.text-maxsize').style.display = 'flex';
+      }
+  })
+  if (file) {
+    reader.readAsDataURL(file);
+  }
+});
+
+
+// Requete POST via Fetch 
+const submitBtn = document.getElementById('add-photo2');
+submitBtn.addEventListener('click', postData);
+function postData() {
+  // Récupérer les données nécessaires (image, titre, catégorie) depuis les éléments HTML correspondants
+ 
+  const title = document.getElementById('title-input').value;
+  const category = document.getElementById('category-select').value;
+  const image = document.getElementById('input-file').files[0];
+
+  if (!title && !image) {
+    // Afficher un message d'erreur à l'utilisateur
+    alert('Veuillez ajouter une image et mettre un titre.');
+    return; // Arrêter l'exécution de la fonction si les champs ne sont pas remplis
+  }
+
+  if (!title) {
+    // Afficher un message d'erreur spécifique au champ titre
+    alert('Veuillez remplir le champ titre.');
+    return; // Arrêter l'exécution de la fonction si le champ titre n'est pas rempli
+  }
+
+  if (!image) {
+    alert('Veuillez importer une image.');
+    return; // Arrêter l'exécution de la fonction si l'image n'est pas rempli
+  }
+
+
+
+
+  // Créer un objet FormData pour envoyer les données en tant que multipart/form-data
+  const formData = new FormData();
+  formData.append('title', title);
+  formData.append('category', category);
+  formData.append("image", image);
+
+  // Effectuer la requête POST avec fetch
+  fetch('http://localhost:5678/api/works', {
+    method: 'POST',
+    body: formData,
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Accept': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    // Traiter la réponse de l'API si nécessaire
+    console.log(data);
+  })
+  .catch(error => {
+    // Gérer les erreurs de requête
+    console.error('Erreur :', error);
   });
+}
