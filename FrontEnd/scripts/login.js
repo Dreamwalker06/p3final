@@ -54,6 +54,7 @@ if (localStorage.getItem('token')) {
     document.querySelector('.header-edition').style.paddingTop = '50px';
     document.querySelector('#logout').textContent = 'logout';
     document.querySelector('#logout').style.fontSize = '16.8px';
+    document.querySelector('.modify-bio').style.display = 'flex';
     logout.addEventListener('click', (event) => {
       event.preventDefault();
       localStorage.removeItem('token');
@@ -67,6 +68,7 @@ if (localStorage.getItem('token')) {
     document.querySelector('.modify-portrait').style.display = 'none';
     document.querySelector('.modify-projet-logo').style.display = 'none';
     document.querySelector('.filtre').style.display = 'flex';
+    document.querySelector('.modify-bio').style.display = 'none';
   }
 
   const modalContainer = document.querySelector(".modal-container");
@@ -221,9 +223,6 @@ function postData() {
     alert('Veuillez importer une image.');
     return; // Arrêter l'exécution de la fonction si l'image n'est pas rempli
   }
-
-
-
 
   // Créer un objet FormData pour envoyer les données en tant que multipart/form-data
   const formData = new FormData();
