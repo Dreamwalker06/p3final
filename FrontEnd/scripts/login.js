@@ -102,6 +102,28 @@ if (localStorage.getItem('token')) {
         title.textContent = "éditer";
         div.appendChild(title);
 /* Supression de works */
+function fetchAndDisplayProjects() {
+  fetch('http://localhost:5678/api/works')
+    .then(response => response.json())
+    .then(data => {
+      const gallery = document.querySelector('.gallery');
+      gallery.innerHTML = ''; // Supprimer les projets existants de l'interface utilisateur
+
+      data.forEach(objet => {
+        const div = document.createElement("div");
+        gallery.appendChild(div);
+        const title = document.createElement("p");
+        title.textContent = objet.title;
+        const img = document.createElement("img");
+        img.src = objet.imageUrl;
+        div.appendChild(img);
+        div.appendChild(title);
+      });
+    })
+    .catch(error => {
+      console.error("Une erreur s'est produite lors de la récupération des données :", error);
+    });
+}
       trashIcon.addEventListener("click", () => {
         fetch(`http://localhost:5678/api/works/${objet.id}`, {
           method: "DELETE",
@@ -114,9 +136,11 @@ if (localStorage.getItem('token')) {
               console.log("Élément supprimé avec succès de l'API");
               // Supprimer également l'élément de l'interface utilisateur
               div.remove();
+              fetchAndDisplayProjects();
             } else {
               console.error("La suppression de l'élément a échoué");
             }
+            
           })
           .catch(error => {
             console.error("Une erreur s'est produite lors de la suppression :", error);
@@ -127,7 +151,7 @@ if (localStorage.getItem('token')) {
   .catch(error => {
     console.error("Une erreur s'est produite lors de la récupération des données :", error);
   });
-  
+
 /* Switch modal */
 const modalContainer2 = document.querySelector(".modal-container2");
 const modalTriggers2 = document.querySelectorAll(".trigger")
@@ -243,6 +267,7 @@ function postData() {
   .then(data => {
     // Traiter la réponse de l'API si nécessaire
     console.log(data);
+    window.location.reload();
   })
   .catch(error => {
     // Gérer les erreurs de requête
